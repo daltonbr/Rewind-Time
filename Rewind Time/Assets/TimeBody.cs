@@ -10,12 +10,14 @@ public class TimeBody : MonoBehaviour
 	private bool _isRewinding = false;
 	private List<PointInTime> _pointsInTime;
 	private Rigidbody _rigidbody;
-	
-	void Awake ()
+    private int _framesToRecord;
+
+    void Awake ()
 	{
 		_pointsInTime = new List<PointInTime>();
 		_rigidbody = GetComponent<Rigidbody>();
-	}
+        _framesToRecord = Mathf.RoundToInt(RecordTime / Time.fixedDeltaTime);
+    }
 		
 	void Update ()
 	{
@@ -45,12 +47,11 @@ public class TimeBody : MonoBehaviour
 		{
 			StopRewind();
 		}
-		
 	}
 
 	void Record ()
 	{
-		if (_pointsInTime.Count > Mathf.Round(RecordTime / Time.fixedDeltaTime))
+		if (_pointsInTime.Count > _framesToRecord)
 		{
 			_pointsInTime.RemoveAt(_pointsInTime.Count - 1);
 		}
