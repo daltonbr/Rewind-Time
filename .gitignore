@@ -2,6 +2,9 @@
 Rewind\ Time/.vs/
 temp.sql
 
+# Visual Studio Code
+.vscode/
+
 # =============== #
 # Unity folders #
 # =============== #

@@ -56,7 +56,7 @@ public class TimeBody : MonoBehaviour
 			_pointsInTime.RemoveAt(_pointsInTime.Count - 1);
 		}
 
-		_pointsInTime.Insert(0, new PointInTime(this.transform));
+		_pointsInTime.Insert(0, new PointInTime(this.transform, _rigidbody));
 	}
 
 	public void StartRewind ()
@@ -69,5 +69,14 @@ public class TimeBody : MonoBehaviour
 	{
 		_isRewinding = false;
 		_rigidbody.isKinematic = false;
+        ReapplyForces();
 	}
+
+    public void ReapplyForces()
+     {
+        _rigidbody.position = _pointsInTime[0].Position;
+        _rigidbody.rotation = _pointsInTime[0].Rotation;
+        _rigidbody.velocity = _pointsInTime[0].Velocity;
+        _rigidbody.angularVelocity = _pointsInTime[0].AngularVelocity;
+    }﻿
 }
